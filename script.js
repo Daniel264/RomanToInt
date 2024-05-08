@@ -1,7 +1,8 @@
 function intToRoman(n) {
-    let r = 0;
     let number;
-    let value;
+    let value = '';
+    let currentValue;
+    let prevValue = '';
     function separateUnits(num) {
         number = num.toString().split('');
         var multiplier = 1;
@@ -14,47 +15,64 @@ function intToRoman(n) {
 
         let p = 0;
         while (p < number.length) {
-            console.log(number[p]);
-            switch (number[p]) {
-                case 3000:
-                    value = 'MMM'
-                    break;
-                case 2000:
-                    value = 'MM'
-                    break;
-                case 1000:
-                    value = 'M'
-                    break;
-                case 500:
-                    value = 'D'
-                    break;
-                case 100:
-                    value = 'C'
-                    break;
-                case 50:
-                    value = 'L'
-                    break;
-                case 10:
-                    value = 'X'
-                    break;
-                case 5:
-                    value = 'V'
-                    break;
-                case 1:
-                    value = 'I'
-                    break;
-                case number[p] < 100:
-                    while (number[p] % 10 ==)  {
-                        
-                    }
-                default:
-                    break;
-                 if
+            if (number[p] >= 1000) {
+                value = 'M'.repeat(Math.floor(number[p] / 1000));
+            }
+            else if (number[p] === 900) {
+                value = 'CM';
+            }
+            else if (number[p] > 500) {
+                value = 'D' + 'C'.repeat(Math.floor(number[p] / 100) - 5)
+            }
+            else if (number[p] === 500) {
+                value = 'D';
+            }
+            else if (number[p] === 400) {
+                value = 'CD';
+            }
+            else if (number[p] >= 100) {
+                value = 'C'.repeat(Math.floor(number[p] / 100));
+            }
+            else if (number[p] === 90) {
+                value = 'XC';
+            }
+            else if (number[p] >= 60) {
+                value = 'L' + 'X'.repeat(Math.floor(number[p] / 10) - 5);
+            }
+            else if (number[p] === 50) {
+                value = 'L';
+            }
+            else if (number[p] === 40) {
+                value = 'XL';
+            }
+            else if (number[p] >= 10) {
+                value = 'X'.repeat(Math.floor(number[p] / 10));
+            }
+            else if (number[p] === 5) {
+                value = 'V';
+            }
+            else if (number[p] === 9) {
+                value = 'IX';
+            }
+            else if (number[p] >= 6) {
+                value = 'V' + 'I'.repeat(number[p] - 5)
+            }
+            else if (number[p] === 4) {
+                value = 'IV';
+            }
+            else if (number[p] >= 1) {
+                value = 'I'.repeat(number[p]);
+            }
+            else {
+                value = '';
             }
             console.log(value);
+            currentValue = value;
+            prevValue += currentValue;
             p++;
         }
+        console.log(prevValue);
     }
-    separateUnits(2134);
+    separateUnits(10);
 }
 intToRoman();
